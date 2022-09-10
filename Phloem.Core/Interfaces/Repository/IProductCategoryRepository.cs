@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Phloem.Core.Interfaces.Repository
 {
-    public interface IProductCategory
+    public interface IProductCategoryRepository
     {
 
     }

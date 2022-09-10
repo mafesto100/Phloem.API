@@ -8,7 +8,15 @@
 
   <ItemGroup>
     <Folder Include="Context\" />
-    <Folder Include="Repository\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Configuration.Abstractions" Version="6.0.0" />
+    <PackageReference Include="System.Data.SqlClient" Version="4.8.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Phloem.Core\Phloem.Core.csproj" />
   </ItemGroup>
 
 </Project>
