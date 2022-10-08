@@ -1,5 +1,6 @@
 using Phloem.Core.Interfaces.Repository;
 using Phloem.Infrastructure.Context;
+using Phloem.Infrastructure.Helpers;
 using Phloem.Infrastructure.Repository;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -11,7 +12,9 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddSingleton<DapperContext>();
+builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
+
 
 var app = builder.Build();
 

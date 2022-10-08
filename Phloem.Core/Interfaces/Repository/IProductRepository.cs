@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Phloem.Core.Model.DTOs;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,9 +10,7 @@ namespace Phloem.Core.Interfaces.Repository
 {
     public interface IProductRepository
     {
-        public async Task<IEnumerable> GetProducts()
-        {
-
-        }
+        public Task<IEnumerable<ProductDTO>> GetProducts();
+        public Task<ProductDTO> GetProduct(int ProductID);
     }
 }
