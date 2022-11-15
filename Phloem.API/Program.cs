@@ -15,6 +15,12 @@ builder.Services.AddSingleton<DapperContext>();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles).Assembly);
 builder.Services.AddScoped<IProductRepository, ProductRepository>();
 
+//Add caching services
+builder.Services.AddStackExchangeRedisCache(options =>
+{
+    options.Configuration = "";
+    options.InstanceName = "Phloem API";
+});
 
 var app = builder.Build();
 

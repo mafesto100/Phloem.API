@@ -26,22 +26,25 @@ namespace Phloem.Infrastructure.Repository
             var product = _mapper.Map<Product>(productDTO);
             var query = $"SELECT * FROM Products WHERE ProductID={product.ProductID}";
 
-            using (var connection = _dapperContext.CreateConnection())
+            var item = await _dapperContext.GetItem<Product>(query);
+
+            if (item != null)
             {
-                var item = await connection.QuerySingleAsync<Product>(query);
-
-                if(item != null)
+                CartItemDTO cartItem = new()
                 {
-                    CartItemDTO cartItem = new()
-                    {
-                        ProductID = item.ProductID,
-                        Price = item.Price,
-                        
-                    }
-                }
+                    ProductID = item.ProductID,
+                    Price = item.Price,
+                };
             }
-            
 
+          
+            throw new NotImplementedException();
+
+        }
+
+        public Task<CartItem> AddItem(CartItemDTO cartItemDTO)
+        {
+            throw new NotImplementedException();
         }
 
         public Task<CartItem> GetCartItem(int ProductID)

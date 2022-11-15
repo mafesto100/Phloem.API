@@ -41,5 +41,10 @@ namespace Phloem.Infrastructure.Repository
         {
             throw new NotImplementedException();
         }
+
+        Task<User> IUserStoreRepository.GetUser(int id)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

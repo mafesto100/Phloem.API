@@ -1,5 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
+using Phloem.Core.Domain;
+using Phloem.Core.Interfaces.Context;
+using Dapper;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace Phloem.Infrastructure.Context
 {
-    public class DapperContext
+    public class DapperContext: IDapperContext
     {
         private readonly IConfiguration _configuration;
         private readonly string _connectionString;
@@ -21,5 +25,25 @@ namespace Phloem.Infrastructure.Context
         }
 
         public IDbConnection CreateConnection() => new SqlConnection(_connectionString);
+
+        public async Task<T> GetItem<T>(string Query, object? Parms = null)
+        {
+            using (IDbConnection db = CreateConnection())
+            {
+                T value = await db.QuerySingleAsync<T>(Query, Parms);
+
+                return value;
+            }
+        }
+
+        public async Task<IEnumerable<T>> GetItems<T>(string Query, object? Parms = null)
+        {
+            using (IDbConnection db = CreateConnection())
+            {
+                IEnumerable<T> values = await db.QueryAsync<T>(Query, Parms);
+
+                return values;
+            }
+        }
     }
 }
